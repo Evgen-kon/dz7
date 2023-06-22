@@ -72,8 +72,11 @@
       const BTN_VK = delclass.querySelector(".vkorz");
       BTN_VK.classList.remove("vkorz");
       CardItem.removeChild(e.target.parentNode);
-      if(CardItem.querySelector(".ToCard") == null)
+      if(CardItem.querySelector(".ToCard") == null){
       CardItem.setAttribute("hidden","true");
+      CardItem.innerHTML="";
+      console.log(CardItem);
+      }
 
     }
   });
