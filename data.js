@@ -1,0 +1,20 @@
+const Featured_Items = `[
+    {
+        "imgurl":"img/1.png"
+    },
+    {
+        "imgurl":"img/2.png"
+    },
+    {
+        "imgurl":"img/3.png"
+    },
+    {
+        "imgurl":"img/4.png"
+    },
+    {
+        "imgurl":"img/5.png"
+    },
+    {
+        "imgurl":"img/6.png"
+    }
+]`

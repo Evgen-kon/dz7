@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вещи</title>
+</head>
+<style>
+ .divitem{
+  border:  1px solid black;
+
+ }
+ button{
+  float:right;
+ }
+ .CardItem{
+  border:2px solid green;
+ }
+</style>
+<body>
+  <H1>Fetured Items</H1>
+  <p>Shop for items based on what we featured in this week</p>
+  <div class = "content"></div>
+  <script src="data.js" ></script>
+  <script src="data1.js" ></script>
+  <script>
+  const Contentshop = JSON.parse(Featured_Items);
+  const textItem = JSON.parse(Content_Item);
+  const ItemMass = document.querySelector(".content");
+  Contentshop.forEach(function (elem,index) {
+    const divitem = document.createElement('div');
+    divitem.id = index;
+    ItemMass.appendChild(divitem);
+    const imgItem = document.createElement('img');
+    imgItem.setAttribute("src",elem.imgurl);
+    divitem.appendChild(imgItem);
+    const Parag = document.createElement("h3");
+    Parag.textContent = textItem.parag;
+    divitem.appendChild(Parag);
+    const ptext = document.createElement("p");
+    ptext.textContent = textItem.content;
+    divitem.appendChild(ptext);
+    const price = document.createElement("p");
+    price.textContent ="$" + textItem.price;
+    divitem.appendChild(price);
+    const ToCard = document.createElement("button");
+    ToCard.classList.add("ToCard");
+    ToCard.textContent = "Add to card";
+    divitem.appendChild(ToCard);
+    divitem.classList.add("divitem");
+    divitem.insertAdjacentHTML('afterend',"<br/><br/><br/>");
+  });
+  ItemMass.insertAdjacentHTML("afterend","<div class = 'CardItem'><H1> Card </H1></div>");
+  const CardItem = document.querySelector(".CardItem");
+  CardItem.setAttribute("hidden","true");
+  ItemMass.addEventListener("click",function(e){
+    if(e.target.classList.contains('ToCard'))
+    if(!e.target.classList.contains("vkorz"))
+    {
+      CardItem.removeAttribute("hidden");
+      CardItem.insertAdjacentHTML("beforeend",e.target.parentNode.outerHTML);
+      e.target.classList.add("vkorz");
+      CardItem.lastChild.insertAdjacentHTML("afterbegin","<button class = 'krest'>X</button>");
+      CardItem.lastChild.insertAdjacentHTML("afterend","<br/><br/><br/>");
+    }
+  });
+  CardItem.addEventListener("click",function(e){
+    if(e.target.classList.contains("krest"))
+    {
+      const delclass = ItemMass.querySelector(`[id = "${e.target.parentNode.id}"]`);
+      const BTN_VK = delclass.querySelector(".vkorz");
+      BTN_VK.classList.remove("vkorz");
+      CardItem.removeChild(e.target.parentNode);
+      if(CardItem.querySelector(".ToCard") == null)
+      CardItem.setAttribute("hidden","true");
+
+    }
+  });
+  
+  
+
+  </script>
+</body>
+</html>
